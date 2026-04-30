@@ -1,6 +1,8 @@
 idf_component_register(
     SRCS
         "src/xbox_input.c"
+        "src/xbox_input_ble.c"
+        "src/xbox_input_parser.c"
     INCLUDE_DIRS
         "include"
     REQUIRES
