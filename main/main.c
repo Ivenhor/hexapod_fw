@@ -200,14 +200,24 @@ static void set_all_torque(st_servo_t *bus, uint8_t enable) {
 /* app_main                                                            */
 /* ------------------------------------------------------------------ */
 
+static void on_xbox_connected(void) {
+    xbox_input_rumble_t pulse = {
+        .motor_center    = true,
+        .power_center    = 90,
+        .time_active_10ms = 30, /* 120 ms */
+    };
+    xbox_input_set_rumble(&pulse);
+}
+
 void app_main(void) {
     /* Xbox controller */
     xbox_input_config_t input_cfg = {
-        .deadzone     = 0.10f,
-        .maxVx        = 1.0f,
-        .maxVy        = 1.0f,
-        .maxWz        = 0.8f,
-        .taskPeriodMs = (uint32_t)(kControlDt * 1000.0),
+        .deadzone       = 0.10f,
+        .max_vx         = 1.0f,
+        .max_vy         = 1.0f,
+        .max_wz         = 0.8f,
+        .task_period_ms = (uint32_t)(kControlDt * 1000.0),
+        .on_connected   = on_xbox_connected,
     };
     if (xbox_input_init(&input_cfg) != ESP_OK ||
         xbox_input_start()          != ESP_OK ||
