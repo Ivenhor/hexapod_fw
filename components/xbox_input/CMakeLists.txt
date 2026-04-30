@@ -1,0 +1,12 @@
+idf_component_register(
+    SRCS
+        "src/xbox_input.c"
+    INCLUDE_DIRS
+        "include"
+    REQUIRES
+        freertos
+        log
+        esp_timer
+        bt
+        nvs_flash
+)
